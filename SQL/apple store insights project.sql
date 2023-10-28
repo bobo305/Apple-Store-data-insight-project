@@ -1,7 +1,3 @@
-                           --Stakeholder--
-  --the stakeholder for this project is an aspiring app developer who wants data driven insights to help decide what type of app to build--
-  --seeking answer to questions like... what app categories are most popular?,what price should the app be priced? and how can they maximize user ratings-  
-
 CREATE TABLE appleStore_description_combined AS
 
 SELECT * FROM appleStore_description1
@@ -29,7 +25,7 @@ FROM AppleStore -- =7197
 SELECT COUNT(DISTINCT id) AS UniqueAppIDs
 FROM appleStore_description_combined -- =7197
 
---Check for any missing values 
+--checking for any missing values 
 
 SELECT COUNT(*) as MissingValues
 from AppleStore
@@ -64,7 +60,7 @@ SELECT CASE
 from AppleStore
 group by App_Type --  Avg ratings paid apps(3.7) ,   Avg ratings free apps(3.37)
 
---check if apps with more supported languages have higher ratings
+--checking if apps with more supported languages have higher ratings
 
 select case
 			WHEN lang_num < 10 THEN '<10 languages'
@@ -77,7 +73,7 @@ GROUP BY language_bucket
 ORDER by Avg_Rating desc -- Avg ratings apps with 10-30 languages(4.1) ,  Avg ratings apps with >30 languages(3.7) ,  Avg ratings apps with <10  languages(3.7)
 
 
---check genre with low ratings 
+--checking genre with low ratings 
 
 SELECT prime_genre,
 		avg(user_rating) as Avg_Rating
@@ -89,7 +85,7 @@ LIMIT 24                                                                --(listi
 -- Catalogs(2.1) , Finance(2.43), Books(2.47), Navigation(2.68), Lifestyle(2.8), News(2.98), Sports(2.982),  Social Networking(2.985), Food&Drink(3.18),  Entertainment(3.23),  Utiilties(3.278), Medical(3.369), Education(3.37)
 -- Travel(3.37), Reference(3.45), Shopping(3.54), Weather(3.59), Games(3.68), Health&Fitness(3.7), Business(3.74), Photo&Video(3.8), Music(3.97), Productivity(4.0) DOUBLE CHECK NUMS AND SPELLING ARE CORRECT BEFORE PLOTING 
 
---check if there is a relation between length of the app description and the user rating
+--checking if there is a relation between length of the app description and the user rating
 
 SELECT case
 			when length(b.app_desc) <500 then 'Short'
@@ -133,14 +129,3 @@ from (
         --Social Networking = "We Heart It - Fashion, wallpapers, quotes, tattoos", Sports = "J23 - Jordan Release Dates and History"(5), Travel = "Urlaubspiraten"(5), Utilities ="Flashlight Ⓞ"(5),
         --Weather = "NOAA Hi-Def Radar Pro -  Storm Warnings, Hurricane Tracker & Weather Forecast"(5)
         --DOUBLE CHECK NUMS AND SPELLING ARE CORRECT BEFORE PLOTING 
-
-
-
---recommendations after analysing the data--
-
---paid apps have better rattings --
---apps supporting between 10 and 30 languages have better ratings--
---Finance and book apps have low ratings  (opportunities to make a better app in these genres where users needs arent being fully met)--
---apps with longer descriptions have better ratings--
---the new app should aim for an avrg rating above 3.5 to really stand out --
---games and enterteinment have a high number of apps / competition (suggest saturated market in these genres, but also in high demand )
